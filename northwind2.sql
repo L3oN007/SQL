@@ -187,7 +187,7 @@ ORDER BY Max_Quantity DESC
 --29. Hien thi cot CategoryID va UnitsInStock cua nhung UnitsInstock nho nhat trong table Products
 SELECT CategoryID,MIN(UnitsInStock)  AS 'Min_UnitInStock'
 FROM dbo.Products
-GROUP BY CategoryID
+GROUP BY CategoryID 
 ORDER BY Min_UnitInStock ASC
 
 --30. Hay hien thi nhung gia tri trung binh cua UnitPrice theo CategoryID va chi hien thi nhung gia tri trung binh trong khoang tu 20 den 30

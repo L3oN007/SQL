@@ -43,7 +43,7 @@ SELECT OrderID,CustomerID,OrderDate
 FROM dbo.Orders
 WHERE MONTH(OrderDate) = 7 AND YEAR(OrderDate) = 1996
 
---1.Hien thi cac cot: CategoryId, CategoryName và Description trong table Categories theo chieu giam dan cua CategoryName
+--1.Hien thi cac cot: CategoryId, CategoryName vï¿½ Description trong table Categories theo chieu giam dan cua CategoryName
 SELECT CategoryID,CategoryName,Description
 FROM dbo.Categories
 ORDER BY CategoryName DESC
@@ -148,18 +148,16 @@ FROM dbo.Products
 WHERE ProductName LIKE 'Queso%' AND ProductName LIKE '%Pastora'
 
 --22. Hay dem co bao nhieu Territory thuoc tung Region
---SELECT Region.RegionID,COUNT(TerritoryID) AS '123'
---FROM dbo.Region
---GROUP BY RegionID
---INNER JOIN dbo.Territories ON Territories.RegionID = Region.RegionID
+SELECT Region.RegionID,COUNT(TerritoryID) AS 'TerritoryPerRegion'
+FROM dbo.Region
+INNER JOIN dbo.Territories ON Territories.RegionID = Region.RegionID
+GROUP BY Region.RegionID
 
 --23. Trong table Customers hay cho biet co bao nhieu customers khong co so fax
 SELECT CustomerID,COUNT(Fax) AS soluong
 FROM dbo.Customers
 GROUP BY CustomerID
 HAVING COUNT(Fax) NOT LIKE 0
-
-
 
 --24. Tim trong table Customers nhung CompanyName co chieu dai duoi 10 ki tu
 SELECT *
@@ -175,8 +173,6 @@ SELECT ProductID, MAX(UnitPrice) AS 'Max_UnitPrice',  MAX(Quantity) AS 'Max_Quan
 FROM dbo.[Order Details]
 GROUP BY ProductID
 
-
-
 --27. Tinh gia tri trung binh cua cot UnitPrice trong table Order Details
 SELECT ProductID,AVG(UnitPrice) AS 'Average_UnitPrice'
 FROM dbo.[Order Details]
@@ -184,15 +180,22 @@ GROUP BY ProductID
 
 --28. Tim nhung Quantity cao nhat trong table Order Details tren ProductName
 SELECT ProductName, MAX(Quantity) AS 'Max_Quantity'
-FROM dbo.[Order Details]
-INNER JOIN dbo.Products ON Products.ProductID = [Order Details].ProductID
-
---29. Hien thi cot CategoryID va UnitsInStock cua nhung UnitsInstock nho nhat trong table Products
-SELECT CategoryID,UnitsInStock,MIN(UnitsInStock)
 FROM dbo.Products
-GROUP BY UnitsInStock
+INNER JOIN dbo.[Order Details] ON [Order Details].ProductID = Products.ProductID
+GROUP BY ProductName
+ORDER BY Max_Quantity DESC
+--29. Hien thi cot CategoryID va UnitsInStock cua nhung UnitsInstock nho nhat trong table Products
+SELECT CategoryID,MIN(UnitsInStock)  AS 'Min_UnitInStock'
+FROM dbo.Products
+GROUP BY CategoryID
+ORDER BY Min_UnitInStock ASC
+
 
 --30. Hay hien thi nhung gia tri trung binh cua UnitPrice theo CategoryID va chi hien thi nhung gia tri trung binh trong khoang tu 20 den 30
-
+SELECT CategoryID,AVG(UnitPrice) AS 'AVG_UnitPrice'
+FROM dbo.Categories
+INNER JOIN dbo.Products ON Products.CategoryID = Categories.CategoryID
+GROUP BY Categories.CategoryID
+HAVING AVG(UnitPrice) BETWEEN 20 AND 30
 
 

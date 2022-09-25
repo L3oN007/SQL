@@ -178,17 +178,15 @@ FROM dbo.[Order Details]
 GROUP BY ProductID
 
 --28. Tim nhung Quantity cao nhat trong table Order Details tren ProductName
-SELECT ProductName, MAX(Quantity) AS 'Max_Quantity'
+SELECT ProductName,Quantity
 FROM dbo.Products
 INNER JOIN dbo.[Order Details] ON [Order Details].ProductID = Products.ProductID
-GROUP BY ProductName
-ORDER BY Max_Quantity DESC
+WHERE Quantity = (SELECT MAX(Quantity) FROM dbo.[Order Details])
 
 --29. Hien thi cot CategoryID va UnitsInStock cua nhung UnitsInstock nho nhat trong table Products
-SELECT CategoryID,MIN(UnitsInStock)  AS 'Min_UnitInStock'
-FROM dbo.Products
-GROUP BY CategoryID 
-ORDER BY Min_UnitInStock ASC
+SELECT DISTINCT CategoryID, UnitsInStock AS 'Min_UnitInStock'
+from Products 
+where UnitsInStock = (select Min(UnitsInStock) from Products)
 
 --30. Hay hien thi nhung gia tri trung binh cua UnitPrice theo CategoryID va chi hien thi nhung gia tri trung binh trong khoang tu 20 den 30
 SELECT Products.CategoryID,AVG(UnitPrice) AS 'AVG_UnitPrice'

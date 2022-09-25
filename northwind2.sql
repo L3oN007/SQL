@@ -130,7 +130,6 @@ FROM dbo.Products
 INNER JOIN dbo.Categories ON Categories.CategoryID = Products.CategoryID
 WHERE CategoryName = 'Seafood'
 
-
 --19. Hien thi: ProductID, ProductName, QuantityPerUnit vaf UnitsInStock cua nuhng san pham thuoc loai 'Confections' va co QunatityPerUnit chua chuoi 'boxes' hoac bags
 SELECT ProductID,ProductName,QuantityPerUnit,UnitsInStock,CategoryName
 FROM dbo.Products
@@ -184,18 +183,18 @@ FROM dbo.Products
 INNER JOIN dbo.[Order Details] ON [Order Details].ProductID = Products.ProductID
 GROUP BY ProductName
 ORDER BY Max_Quantity DESC
+
 --29. Hien thi cot CategoryID va UnitsInStock cua nhung UnitsInstock nho nhat trong table Products
 SELECT CategoryID,MIN(UnitsInStock)  AS 'Min_UnitInStock'
 FROM dbo.Products
 GROUP BY CategoryID
 ORDER BY Min_UnitInStock ASC
 
-
 --30. Hay hien thi nhung gia tri trung binh cua UnitPrice theo CategoryID va chi hien thi nhung gia tri trung binh trong khoang tu 20 den 30
-SELECT CategoryID,AVG(UnitPrice) AS 'AVG_UnitPrice'
+SELECT Products.CategoryID,AVG(UnitPrice) AS 'AVG_UnitPrice'
 FROM dbo.Categories
 INNER JOIN dbo.Products ON Products.CategoryID = Categories.CategoryID
-GROUP BY Categories.CategoryID
+GROUP BY Products.CategoryID
 HAVING AVG(UnitPrice) BETWEEN 20 AND 30
 
 

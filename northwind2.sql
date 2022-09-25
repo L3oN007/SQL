@@ -188,7 +188,9 @@ FROM dbo.[Order Details]
 INNER JOIN dbo.Products ON Products.ProductID = [Order Details].ProductID
 
 --29. Hien thi cot CategoryID va UnitsInStock cua nhung UnitsInstock nho nhat trong table Products
-
+SELECT CategoryID,UnitsInStock,MIN(UnitsInStock)
+FROM dbo.Products
+GROUP BY UnitsInStock
 
 --30. Hay hien thi nhung gia tri trung binh cua UnitPrice theo CategoryID va chi hien thi nhung gia tri trung binh trong khoang tu 20 den 30
 

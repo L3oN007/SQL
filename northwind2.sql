@@ -153,10 +153,8 @@ INNER JOIN dbo.Territories ON Territories.RegionID = Region.RegionID
 GROUP BY Region.RegionID
 
 --23. Trong table Customers hay cho biet co bao nhieu customers khong co so fax
-SELECT CustomerID,COUNT(Fax) AS soluong
+SELECT CustomerID,Fax 
 FROM dbo.Customers
-GROUP BY CustomerID
-HAVING COUNT(Fax) NOT LIKE 0
 
 --24. Tim trong table Customers nhung CompanyName co chieu dai duoi 10 ki tu
 SELECT *
@@ -194,5 +192,4 @@ FROM dbo.Categories
 INNER JOIN dbo.Products ON Products.CategoryID = Categories.CategoryID
 GROUP BY Products.CategoryID
 HAVING AVG(UnitPrice) BETWEEN 20 AND 30
-
 

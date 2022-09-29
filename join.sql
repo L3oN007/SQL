@@ -53,19 +53,34 @@ JOIN dbo.Products ON Products.ProductID = [Order Details].ProductID
 WHERE Quantity > 2
 
 --9. Write a SELECT query to display total orders of every employee in 1996 as following:
-SELECT Employees.EmployeeID,COUNT(OrderID) AS 'total order'
+SELECT Employees.EmployeeID,YEAR(OrderDate) AS 'Year',COUNT(OrderID) AS 'Total order'
 FROM dbo.Employees
 JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
-GROUP BY Employees.EmployeeID
-HAVING YEAR(BirthDate)  LIKE 1996
+GROUP BY Employees.EmployeeID,YEAR(OrderDate)
+HAVING YEAR(OrderDate) = '1996'
 
 --10. Write a SELECT query to display total orders of every employee in 1998 as following:
-
+SELECT Employees.EmployeeID,LastName,FirstName,Title,YEAR(OrderDate) AS 'Year',COUNT(OrderID) AS 'total order'
+FROM dbo.Employees
+JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
+GROUP BY Employees.EmployeeID,LastName,FirstName,Title,YEAR(OrderDate)
+HAVING YEAR(OrderDate) = '1996'
 
 --11. Write a SELECT query to display total orders of every employee from 1/1/1998 to 31/7/1998 as following:
-
+SELECT Employees.EmployeeID,LastName,FirstName,Title,OrderDate,COUNT(OrderID) AS 'Total order'
+FROM dbo.Employees
+JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
+GROUP BY Employees.EmployeeID,LastName,FirstName,Title,OrderDate
+HAVING OrderDate BETWEEN ('1998-1-1') AND ('1998-7-31')
+ORDER BY Employees.EmployeeID ASC
 
 --12. Write a SELECT query to display total orders of every employee from 1/1/1997 to 30/6/1997 as following:
+SELECT Employees.EmployeeID,LastName,FirstName,Title,OrderDate,COUNT(OrderID) AS 'Total order'
+FROM dbo.Employees
+JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
+GROUP BY Employees.EmployeeID,LastName,FirstName,Title,OrderDate
+HAVING OrderDate BETWEEN ('1997-1-1') AND ('1997-6-30')
+ORDER BY Employees.EmployeeID ASC
 
 
 --18. Liet ke ProductID, ProductName, CategoryName nhung Product thuoc CategoryName la 'Seafood'

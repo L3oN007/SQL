@@ -43,6 +43,27 @@ SELECT ProductID,ProductName,UnitPrice,ReorderLevel,UnitsOnOrder
 FROM dbo.Products
 WHERE UnitsOnOrder BETWEEN 60 AND 100
 
+--Ex9
+SELECT Employees.EmployeeID,LastName,FirstName,Title,YEAR(OrderDate) AS 'Year',COUNT(OrderID) AS 'total order'
+FROM dbo.Employees
+JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
+GROUP BY Employees.EmployeeID,LastName,FirstName,Title,YEAR(OrderDate)
+HAVING YEAR(OrderDate) = '1996'
+
+--Ex10:
+SELECT Employees.EmployeeID,LastName,FirstName,Title,YEAR(OrderDate) AS 'Year',COUNT(OrderID) AS 'total order'
+FROM dbo.Employees
+JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
+GROUP BY Employees.EmployeeID,LastName,FirstName,Title,YEAR(OrderDate)
+HAVING YEAR(OrderDate) = '1998'
+--Ex11:
+SELECT Employees.EmployeeID,LastName,FirstName,HireDate --,COUNT(OrderID) AS 'total order'
+FROM dbo.Employees
+JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
+GROUP BY Employees.EmployeeID,LastName,FirstName,HireDate
+HAVING (MONTH(HireDate) BETWEEN 1 AND 7) AND (YEAR(HireDate) = '1998')
+--Ex13:
+
 --Ex9:
 --SELECT EmployeeID,LastName,FirstName,Title,BirthDate AS year
 --FROM dbo.Employees 

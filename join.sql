@@ -1,5 +1,7 @@
 --joins, products
-
+SELECT Customers.CustomerID
+FROM dbo.Customers
+JOIN dbo.Orders ON Orders.CustomerID = Customers.CustomerID
 
 --vidu 1. Lay ten Khach hang va orderID cua khach hang do
 SELECT Orders.CustomerID,ContactName,OrderID
@@ -20,10 +22,12 @@ GROUP BY CompanyName
 SELECT *
 FROM dbo.Customers
 JOIN dbo.Orders ON Orders.CustomerID = Customers.CustomerID
+
 --vidu 4. It returns  ProductName, Companyname and categoryname for each product.
 SELECT ProductName,CompanyName,CategoryName
 FROM dbo.Products p,dbo.Categories c,dbo.Suppliers s
 WHERE p.ProductName = c.CategoryID AND p.SupplierID = s.SupplierID
+
 ---------------------------------------------------------------------
 SELECT ProductName,CompanyName,CategoryName
 FROM dbo.Products
@@ -62,10 +66,7 @@ HAVING YEAR(BirthDate)  LIKE 1996
 
 
 --12. Write a SELECT query to display total orders of every employee from 1/1/1997 to 30/6/1997 as following:
-SELECT DISTINCT Employees.EmployeeID,HireDate
-FROM dbo.Orders
-JOIN dbo.Employees ON Employees.EmployeeID = Orders.EmployeeID
-WHERE HireDate 
+
 
 --18. Liet ke ProductID, ProductName, CategoryName nhung Product thuoc CategoryName la 'Seafood'
 SELECT ProductID,ProductName,CategoryName

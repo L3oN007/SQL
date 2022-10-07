@@ -153,9 +153,12 @@ INNER JOIN dbo.Territories ON Territories.RegionID = Region.RegionID
 GROUP BY Region.RegionID
 
 --23. Trong table Customers hay cho biet co bao nhieu customers khong co so fax
-SELECT CustomerID,Fax 
+SELECT COUNT(*) - COUNT(Fax) AS 'So luong null fax'
 FROM dbo.Customers
+WHERE Fax IS NULL
 
+SELECT COUNT(*)
+FROM dbo.Customers
 --24. Tim trong table Customers nhung CompanyName co chieu dai duoi 10 ki tu
 SELECT *
 FROM dbo.Customers

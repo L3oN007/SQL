@@ -39,12 +39,13 @@ CREATE TABLE employee1
 	firstName nvarchar(20) not null,
 	phone char(12) unique,
 	Addr nvarchar(30) default N'Hồ Chí Minh',
-	DOB datetime check (year(getdate()) - year(DOB) >=18)
+	DOB datetime check (year(getdate()) - year(DOB) >=18),
+	depart_ID char(10) FOREIGN KEY REFERENCES department(depart_ID)
 )
 
 select * from employee1
-insert into employee1 values ('EM0001',N'Vũ',N'Minh Nhật','09123456',N'Hà Nội','2000-5-10')
-insert into employee1 values ('EM0002',N'Vũ',N'Minh Nhi','09127689',N'Hải Phòng','2000-5-10')
+insert into employee1 values ('EM0001',N'Vũ',N'Minh Nhật','09123456',N'Hà Nội','2000-5-10',null)
+insert into employee1 values ('EM0002',N'Vũ',N'Minh Nhi','09127689',N'Hải Phòng','2000-5-10',null)
 insert into employee1 values ('EM0003',N'Nguyễn',N'Minh B','09876543',N'Hải Phòng','2000-5-10',null)
 
 
@@ -79,7 +80,11 @@ set sex = N'Nam'
 
 --8. FOREIGN KEY
 --	Attribute datatype FOREIGN KEY REFERENCES tablename(Attribute)
-
+create table department
+	(
+		depart_ID char(10) PRIMARY KEY,
+		nameDepart nvarchar(20) 
+	)
 	
 
 

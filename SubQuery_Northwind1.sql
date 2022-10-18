@@ -45,7 +45,7 @@ WHERE ShipCountry NOT IN('Mexico','Brazil','USA')
 -- TOÁN TỬ IN dùng cho tập rời rạc
 SELECT*
 FROM Orders
-WHERE year(OrderDate)=1996 AND month(OrderDate) NOT IN (1,2,3)
+WHERE YEAR(OrderDate)=1996 AND MONTH(OrderDate) NOT IN (1,2,3)
 
 --5. Liệt kê các khách hàng từ Mỹ và Brazil có số fax và Region
 SELECT*

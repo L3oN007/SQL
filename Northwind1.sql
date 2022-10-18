@@ -58,16 +58,18 @@ JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
 GROUP BY Employees.EmployeeID,LastName,FirstName,Title,YEAR(OrderDate)
 HAVING YEAR(OrderDate) = '1998'
 --Ex11:
-SELECT Employees.EmployeeID,LastName,FirstName,HireDate --,COUNT(OrderID) AS 'total order'
+SELECT Employees.EmployeeID,LastName,FirstName,HireDate ,COUNT(OrderID) AS 'total order'
 FROM dbo.Employees
 JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
+WHERE (MONTH(OrderDate) BETWEEN 1 AND 7) AND (YEAR(OrderDate) = '1998')
 GROUP BY Employees.EmployeeID,LastName,FirstName,HireDate
-HAVING (MONTH(HireDate) BETWEEN 1 AND 7) AND (YEAR(HireDate) = '1998')
 
 --Ex12:
-SELECT Employees.EmployeeID,LastName,FirstName,HireDate,HomePhone,COUNT(OrderID)
+SELECT Employees.EmployeeID,LastName,FirstName,HireDate,HomePhone,COUNT(OrderID) AS 'Total order'
 FROM dbo.Employees
 JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
+WHERE OrderDate BETWEEN '1997/1/1' AND '1997/6/30'
+GROUP BY Employees.EmployeeID,LastName,FirstName,HireDate,HomePhone
 
 --Ex21: 
 SELECT Products.CategoryID,CategoryName,Products.ProductID,ProductName,DAY(OrderDate),MONTH(OrderDate),YEAR(OrderDate),(Quantity * [Order Details].UnitPrice) AS 'Revenue'
@@ -83,16 +85,19 @@ FROM dbo.Employees
 JOIN dbo.Orders ON Orders.EmployeeID = Employees.EmployeeID
 WHERE ShippedDate -RequiredDate > 7
 ORDER BY Employees.EmployeeID
---Ex9:
---SELECT EmployeeID,LastName,FirstName,Title,BirthDate AS year
---FROM dbo.Employees 
---INNER JOIN dbo.Orders 
+
+--Ex23:
+
+
+--Ex24:
+SELECT CustomerID,CompanyName,ContactName,ContactTitle
+FROM dbo.Customers
+--WHERE CustomerID = 10643
 
 --Ex32:
 SELECT ProductID,ProductName,SupplierID,CategoryID,UnitsInStock 
 FROM dbo.Products
 WHERE UnitsInStock LIKE (SELECT MAX(UnitsInStock) FROM dbo.Products)
-
 
 --Ex33:
 SELECT ProductID,ProductName,SupplierID,CategoryID,UnitsInStock 

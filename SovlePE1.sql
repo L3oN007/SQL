@@ -31,9 +31,12 @@ GROUP BY Jobs.JobID,JobTitle
 ORDER BY NumberOfEmployees DESC 
 
 --Ex7:
-SELECT EmployeeID,FirstName,LastName,Salary,Departments.DepartmentID,DepartmentName,COUNT()
+SELECT EmployeeID,FirstName,LastName,Salary,Departments.DepartmentID,DepartmentName,Departments.DepartmentID AS 'NumberOfSubordinates'
 FROM dbo.Employees
 JOIN dbo.Departments ON Departments.DepartmentID = Employees.DepartmentID
+GROUP BY EmployeeID,FirstName,LastName,Salary,Departments.DepartmentID,DepartmentName
+
+
 
 
 

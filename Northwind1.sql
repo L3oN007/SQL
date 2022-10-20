@@ -88,11 +88,10 @@ ORDER BY Employees.EmployeeID
 
 --Ex23:
 
-
 --Ex24:
 SELECT CustomerID,CompanyName,ContactName,ContactTitle
 FROM dbo.Customers
---WHERE CustomerID = 10643
+--WHERE INDEX_COL(10643)
 
 --Ex32:
 SELECT ProductID,ProductName,SupplierID,CategoryID,UnitsInStock 

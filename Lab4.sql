@@ -37,7 +37,6 @@ CREATE TABLE Results
 	Grade varchar(6),
 	CONSTRAINT result PRIMARY KEY(StudentID,CourseID,Year,Semester)
 )
-SELECT * FROM Students
 
 INSERT INTO Department (DeptID,Name) VALUES ('IS','Information Systems')
 INSERT INTO Department(DeptID,Name) VALUES ('NC','Network and Communication')
